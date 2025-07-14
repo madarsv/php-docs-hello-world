@@ -9,7 +9,17 @@ echo $dbname . "<br>\n";
 
 try {
     // Create connection
-    $conn = mysqli_connect($host, $username, $password, $dbname);
+    // $conn = mysqli_connect($host, $username, $password, $dbname);
+
+    // Initialize connection with SSL
+    $conn = mysqli_init();
+    mysqli_ssl_set($conn, NULL, NULL, "BaltimoreCyberTrustRoot.crt.pem", NULL, NULL);
+    mysqli_real_connect($conn, $host, $username, $password, $dbname, 3306, NULL, MYSQLI_CLIENT_SSL);
+
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+    echo "Connected securely with SSL!";
 
     // Check connection
     if (!$conn) {
