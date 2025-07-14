@@ -32,5 +32,5 @@ try {
     // Close connection
     mysqli_close($conn);
 } catch (\Exception $e) {
-    ehco "Exception: " . $e->getMessage();
+    echo "Exception: " . $e->getMessage();
 }
