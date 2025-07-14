@@ -1,30 +1,36 @@
 <?php
+echo "Test DB<br>\n";
 $host = getenv('MYSQL_HOST');
 $username = getenv('MYSQL_USERNAME');
 $password = getenv('MYSQL_PASSWORD');
 $dbname = getenv('MYSQL_DBNAME');
 
-// Create connection
-$conn = mysqli_connect($host, $username, $password, $dbname);
+echo $dbname . "<br>\n";
 
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+try {
+    // Create connection
+    $conn = mysqli_connect($host, $username, $password, $dbname);
 
-// Query
-$sql = "SELECT * FROM users";
-$result = mysqli_query($conn, $sql);
-
-// Fetch data
-if (mysqli_num_rows($result) > 0) {
-    while ($row = mysqli_fetch_assoc($result)) {
-        echo "ID: " . $row["id"] . " - Name: " . $row["name"] . "<br>";
+    // Check connection
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
     }
-} else {
-    echo "0 results";
-}
 
-// Close connection
-mysqli_close($conn);
-?>
+    // Query
+    $sql = "SELECT * FROM users";
+    $result = mysqli_query($conn, $sql);
+
+    // Fetch data
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo "ID: " . $row["id"] . " - Name: " . $row["name"] . "<br>";
+        }
+    } else {
+        echo "0 results";
+    }
+
+    // Close connection
+    mysqli_close($conn);
+} catch (\Exception $e) {
+    ehco "Exception: " . $e->getMessage();
+}
