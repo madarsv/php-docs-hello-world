@@ -7,7 +7,7 @@ $dbname = getenv('MYSQL_DBNAME');
 
 echo $dbname . "<br>\n";
 
-$certPath = __DIR__ . 'BaltimoreCyberTrustRoot.crt.pem';
+$certPath = __DIR__ . '/BaltimoreCyberTrustRoot.crt.pem';
 echo "cert: <br>\n";
 echo file_get_contents($certPath);
 echo "<br>\n";
