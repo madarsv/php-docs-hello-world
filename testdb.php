@@ -7,19 +7,24 @@ $dbname = getenv('MYSQL_DBNAME');
 
 echo $dbname . "<br>\n";
 
+$certPath = __DIR__ . 'BaltimoreCyberTrustRoot.crt.pem';
+echo "cert: <br>\n";
+echo file_get_contents($certPath);
+echo "<br>\n";
+
 try {
     // Create connection
     // $conn = mysqli_connect($host, $username, $password, $dbname);
 
     // Initialize connection with SSL
     $conn = mysqli_init();
-    mysqli_ssl_set($conn, NULL, NULL, "BaltimoreCyberTrustRoot.crt.pem", NULL, NULL);
+    mysqli_ssl_set($conn, NULL, NULL, $certPath, NULL, NULL);
     mysqli_real_connect($conn, $host, $username, $password, $dbname, 3306, NULL, MYSQLI_CLIENT_SSL);
 
     if (!$conn) {
         die("Connection failed: " . mysqli_connect_error());
     }
-    echo "Connected securely with SSL!";
+    echo "Connected securely with SSL!<br>\n";
 
     // Check connection
     if (!$conn) {
