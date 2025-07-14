@@ -5,12 +5,7 @@ $username = getenv('MYSQL_USERNAME');
 $password = getenv('MYSQL_PASSWORD');
 $dbname = getenv('MYSQL_DBNAME');
 
-echo $dbname . "<br>\n";
-
 $certPath = __DIR__ . '/DigiCertGlobalRootCA.crt.pem';
-echo "cert: <br>\n";
-echo file_get_contents($certPath);
-echo "<br>\n";
 
 try {
     // Create connection
